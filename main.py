@@ -48,14 +48,18 @@ class Blog(db.Model):
 #show all the post
 class MainHandler(Handler):
 	def render_blogs(self):
-		blogs = db.GqlQuery("SELECT * FROM Blog "
-							"ORDER BY created DESC")
+		blogs = db.GqlQuery("SELECT * FROM Blog ORDER BY created DESC Limit 5 ")
 		self.render("index.html", blogs=blogs)
 
 	def get(self):
 		self.render_blogs()
-
-
+# Shows most recent 5 posts on BLOG
+#class BlogPage(Handler):
+    #def get(self):
+        #post = db.GqlQuery("Select * from blogs order by created DESC Limit 5")
+        #t = jinja_env.get_template("index.html")
+        #response = t.render( post=post )
+        #self.response.write(response)
 #newpost
 class NewPostHandler(Handler):
 	def render_newpost(self, title="", body="", error=""):
@@ -172,6 +176,7 @@ class LogoutHandler(Handler):
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
+	#('/?', BlogPage),
     ('/newpost', NewPostHandler),
     ('/(\d+)', OneBlogHandler),
     ('/signup', SignupHandler),

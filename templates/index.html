@@ -41,6 +41,11 @@
 	        margin: 0;
 					font-size: 17px;
 	    }
+			.post-date {
+					font-size: 14px;
+							color: #999;
+
+					}
 	</style>
 
 
@@ -53,15 +58,27 @@
 		<br>
 		<br>
 		<br>
-
 		{% for blog in blogs %}
 			<div class="blog">
 				<div class="blog-title"><a href="/{{blog.key().id()}}">{{blog.title}}</a></div>
-
+          <br>
+					<div class="post-date">
+							{{ blog.created.strftime("%b %d, %Y    %I:%M %p") }}
+					</div>
+					<br>
+					<br>
 				<pre class="blog-body">{{blog.body}}</pre>
 			</div>
 			<hr>
 		{% endfor %}
+		<div class="page-nav">
+        
+ 				<a class="back-nav" href=""> &lt;&lt; Last </a>
+
+       &nbsp;&nbsp;
+ 				<a class="next-nav" href=""> Next&gt;&gt;</a>
+
+ 	 </div>
 	</body>
 
 </html>
